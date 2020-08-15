@@ -9,6 +9,9 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="doctorappointment"
         android:icon="@mipmap/ic_launcher">
+         <!--  API key here -->
+        <meta-data android:name="com.google.android.geo.API_KEY"
+               android:value="AIzaSyDzdlRoBv_DZimDX0OpSoLiLLcRTga3RBg"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
