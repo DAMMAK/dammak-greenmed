@@ -83,8 +83,7 @@ class _LoginState extends State<Login> {
                   width: width * 0.9,
                   text: "Login",
                   onPressed: () {
-                    Navigator.pushReplacementNamed(
-                        context, Routes.initialRoute);
+                    Navigator.pushReplacementNamed(context, Routes.home);
                   },
                 ),
                 SizedBox(height: height * 0.03),
