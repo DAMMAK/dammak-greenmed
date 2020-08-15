@@ -6,4 +6,9 @@ class AppColors {
   static const secondaryColor = Color(0XFF312651);
   static const formBackground = Color(0XFFE6E4E6);
   static const inputBorderColor = Color(0XFFE6F0F3);
+  static const homeButtonColor = Color(0XFFF2F5F5);
+  static const pageBgColor = Color(0XFFE5E5E5);
+  static const dischargeBtnBackground = Color(0XFFE78054);
+  static const btnTextColor = Colors.black;
+  static const btnClickPrimaryColor = Color(0XFF0ABAB5);
 }
