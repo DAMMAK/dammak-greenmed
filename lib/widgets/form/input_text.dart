@@ -9,6 +9,8 @@ class InputText extends StatelessWidget {
   double height;
   bool didHaveIcon;
   IconData icon;
+  final Function validator;
+  final Function onSaved;
   TextInputType keyboardType;
   InputText({
     this.controller,
@@ -19,6 +21,8 @@ class InputText extends StatelessWidget {
     this.didHaveIcon = false,
     this.icon,
     this.keyboardType = TextInputType.text,
+    this.validator,
+    this.onSaved,
   });
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,8 @@ class InputText extends StatelessWidget {
           onChanged: onchanged,
           controller: controller,
           keyboardType: keyboardType,
+          validator: validator,
+          onSaved: onSaved,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,
