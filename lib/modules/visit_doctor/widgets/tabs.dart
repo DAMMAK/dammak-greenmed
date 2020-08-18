@@ -18,7 +18,8 @@ class _DoctorsTabState extends State<DoctorsTab>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController =
+        TabController(length: widget.tabs.tabs.length, vsync: this);
   }
 
   @override
@@ -38,7 +39,7 @@ class _DoctorsTabState extends State<DoctorsTab>
                 fontSize: 20.0,
                 fontWeight: FontWeight.bold,
                 fontFamily: GoogleFonts.ubuntu().fontFamily),
-            tabs: tabs
+            tabs: widget.tabs.tabs
                 .map((e) => Tab(
                       text: e.name,
                     ))
@@ -47,14 +48,18 @@ class _DoctorsTabState extends State<DoctorsTab>
           Expanded(
             child: TabBarView(
                 controller: _tabController,
-                children: tabs
-                    .map((e) => ListView.builder(
-                        itemCount: e.doctors.length,
-                        itemBuilder: (BuildContext context, index) {
-                          return DoctorCard(
-                            doctor: e.doctors[index],
-                          );
-                        }))
+                children: widget.tabs.tabs
+                    .map((e) => Container(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.015),
+                          child: ListView.builder(
+                              itemCount: e.doctors.length,
+                              itemBuilder: (BuildContext context, index) {
+                                return DoctorCard(
+                                  doctor: e.doctors[index],
+                                );
+                              }),
+                        ))
                     .toList()),
           )
         ],
