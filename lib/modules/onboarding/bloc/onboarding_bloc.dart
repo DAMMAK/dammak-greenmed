@@ -24,10 +24,12 @@ class OnboardingBloc extends Bloc<OnboardingEvent, OnboardingState> {
 
   Stream<OnboardingState> _mapSignUpToState(AddSignUpEvent event) async* {
     // trigger Loading State
-    yield OnboardingLoading();
+    yield LoadingOn();
     try {
       // connect to the Sign Up method in the Client class
       var response = await _client.signUp(event.user);
+      // remove loading state
+      yield LoadingOff();
       // check if response is type of boolean
       if (response is bool) {
         yield OnboardingSuccessful();
