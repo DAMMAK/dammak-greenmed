@@ -7,9 +7,12 @@ class InputPassword extends StatefulWidget {
   double height;
   double width;
   String hintText;
+  FocusNode focusNode;
   Color bgColor;
   final Function onSaved;
   final Function validator;
+  TextInputAction inputAction;
+  Function onFieldSubmitted;
   InputPassword({
     this.controller,
     this.height,
@@ -18,7 +21,10 @@ class InputPassword extends StatefulWidget {
     this.width,
     this.bgColor,
     this.onSaved,
+    this.inputAction = TextInputAction.unspecified,
     this.validator,
+    this.focusNode,
+    this.onFieldSubmitted,
   });
   @override
   _InputPasswordState createState() => _InputPasswordState();
@@ -49,7 +55,10 @@ class _InputPasswordState extends State<InputPassword> {
           obscureText: !showPassword,
           onChanged: widget.onChanged,
           onSaved: widget.onSaved,
+          focusNode: widget.focusNode,
           validator: widget.validator,
+          onFieldSubmitted: widget.onFieldSubmitted,
+          textInputAction: widget.inputAction,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: widget.hintText,

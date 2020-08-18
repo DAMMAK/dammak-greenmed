@@ -1,17 +1,18 @@
 import 'package:doctorappointment/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class Button extends StatelessWidget {
-  final Color color;
+class Button extends StatefulWidget {
+  Color color;
   final double width;
   final double height;
-  final Color textColor;
+  Color textColor;
   final String text;
   final Function onPressed;
   final bool didHaveText;
   final bool didHaveIcon;
   final IconData icon;
   final double fontSize;
+  final bool onSelect; // to enable the chnage of color when the button clicked
 
   Button({
     this.color = AppColors.primaryColor,
@@ -24,17 +25,32 @@ class Button extends StatelessWidget {
     this.didHaveText = true,
     this.icon,
     this.fontSize = 17.0,
+    this.onSelect = false,
   });
+
+  @override
+  _ButtonState createState() => _ButtonState();
+}
+
+class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onPressed(),
+      onTap: () {
+        if (widget.onSelect) {
+          setState(() {
+            widget.color = AppColors.btnClickPrimaryColor;
+            widget.textColor = Colors.white;
+          });
+        }
+        widget.onPressed();
+      },
       splashColor: AppColors.secondaryAccentColor,
       child: Container(
-        height: height,
-        width: width,
+        height: widget.height,
+        width: widget.width,
         decoration: BoxDecoration(
-          color: color,
+          color: widget.color,
           borderRadius: BorderRadius.all(
             Radius.circular(13),
           ),
@@ -43,22 +59,22 @@ class Button extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              didHaveText
+              widget.didHaveText
                   ? Text(
-                      text,
+                      widget.text,
                       style: TextStyle(
-                          color: textColor,
-                          fontSize: fontSize,
+                          color: widget.textColor,
+                          fontSize: widget.fontSize,
                           fontWeight: FontWeight.w500),
                     )
                   : SizedBox(),
               SizedBox(
-                width: width * 0.02,
+                width: widget.width * 0.02,
               ),
-              didHaveIcon
+              widget.didHaveIcon
                   ? Icon(
-                      icon,
-                      color: textColor,
+                      widget.icon,
+                      color: widget.textColor,
                     )
                   : SizedBox()
             ],

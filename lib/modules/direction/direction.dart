@@ -11,12 +11,26 @@ class _DirectionState extends State<Direction> {
   GoogleMapController mapController;
   MapType _currentMapType = MapType.normal;
   Marker marker;
-  Location location = Location();
+  final Set<Marker> _markers = {};
+  static LatLng latLng;
+  LocationData currentLocation;
 
-  final LatLng _center = const LatLng(45.521563, -122.677433);
+  // Lat and Long for Adeyemo Alakija Victoria Island
+  final LatLng _center = const LatLng(6.435175, 3.424612);
 
   void _onMapCreated(GoogleMapController controller) {
     mapController = controller;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getLocation();
+    _markers.add(Marker(
+      markerId: MarkerId("111"),
+      position: _center,
+      icon: BitmapDescriptor.defaultMarker,
+    ));
   }
 
   @override
@@ -29,7 +43,26 @@ class _DirectionState extends State<Direction> {
           target: _center,
           zoom: 14.0,
         ),
+        markers: _markers,
       ),
     );
+  }
+
+  getLocation() async {
+    var location = new Location();
+    location.onLocationChanged.listen((currentLocation) {
+      print(currentLocation.latitude);
+      print(currentLocation.longitude);
+      setState(() {
+        latLng = LatLng(currentLocation.latitude, currentLocation.longitude);
+        _markers.add(Marker(
+          markerId: MarkerId("111"),
+          position: latLng,
+          icon: BitmapDescriptor.defaultMarker,
+        ));
+      });
+      print("getLocation:$latLng");
+      // loading = false;
+    });
   }
 }

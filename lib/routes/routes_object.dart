@@ -4,7 +4,11 @@ import 'package:doctorappointment/modules/covid19_news/news.dart';
 import 'package:doctorappointment/modules/direction/direction.dart';
 import 'package:doctorappointment/modules/emergency/call.dart';
 import 'package:doctorappointment/modules/onboarding/sign_up.dart';
-import 'package:doctorappointment/modules/visit_doctor/book_doctor.dart';
+import 'package:doctorappointment/modules/visit_doctor/models/doctor.dart';
+import 'package:doctorappointment/modules/visit_doctor/pages/book_doctor.dart';
+import 'package:doctorappointment/modules/visit_doctor/pages/book_response.dart';
+import 'package:doctorappointment/modules/visit_doctor/pages/choose_appointment.dart';
+import 'package:doctorappointment/modules/visit_doctor/pages/doctor_profile.dart';
 import 'package:doctorappointment/routes/routes.dart';
 import 'package:flutter/material.dart';
 
@@ -32,6 +36,23 @@ var routes = (RouteSettings settings) {
       break;
     case Routes.direction:
       return FadeRoute(page: Direction());
+      break;
+    case Routes.doctorProfile:
+      var doctor = settings.arguments as Doctor;
+      return FadeRoute(
+          page: DoctorProfile(
+        doctor: doctor,
+      ));
+      break;
+    case Routes.chooseDate:
+      var doctor = settings.arguments as Doctor;
+      return FadeRoute(
+          page: ChooseDate(
+        doctor: doctor,
+      ));
+      break;
+    case Routes.bookResponse:
+      return FadeRoute(page: BookResponse());
       break;
     default:
   }

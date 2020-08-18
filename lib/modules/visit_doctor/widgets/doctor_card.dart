@@ -1,4 +1,5 @@
 import 'package:doctorappointment/modules/visit_doctor/models/doctor.dart';
+import 'package:doctorappointment/routes/routes.dart';
 import 'package:doctorappointment/utils/colors.dart';
 import 'package:doctorappointment/widgets/button.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,16 @@ class DoctorCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              SvgPicture.asset("assets/images/doctors/${doctor.imgUrl}"),
+              Hero(
+                tag: doctor.imgUrl,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(width * 0.03)),
+                  child: Image.asset(
+                    "assets/images/doctors/${doctor.imgUrl}",
+                    height: height * 0.09,
+                  ),
+                ),
+              ),
               SizedBox(
                 width: width * 0.03,
               ),
@@ -58,7 +68,11 @@ class DoctorCard extends StatelessWidget {
             didHaveText: false,
             icon: Icons.arrow_forward_ios,
             width: width * 0.15,
-            onPressed: () {},
+            height: height * 0.07,
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(Routes.doctorProfile, arguments: doctor);
+            },
           )
         ],
       ),

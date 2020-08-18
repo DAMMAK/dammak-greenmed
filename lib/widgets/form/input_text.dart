@@ -8,10 +8,15 @@ class InputText extends StatelessWidget {
   Color bgColor;
   double height;
   bool didHaveIcon;
+  bool capitalized;
   IconData icon;
   final Function validator;
   final Function onSaved;
   TextInputType keyboardType;
+  FocusNode focusNode;
+  TextInputAction inputAction;
+  Function onFieldSubmitted;
+
   InputText({
     this.controller,
     this.onchanged,
@@ -23,6 +28,10 @@ class InputText extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.validator,
     this.onSaved,
+    this.capitalized = false,
+    this.inputAction = TextInputAction.unspecified,
+    this.focusNode,
+    this.onFieldSubmitted,
   });
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,13 @@ class InputText extends StatelessWidget {
           controller: controller,
           keyboardType: keyboardType,
           validator: validator,
+          focusNode: focusNode,
+          onFieldSubmitted: onFieldSubmitted,
+          textInputAction: inputAction,
           onSaved: onSaved,
+          textCapitalization: capitalized
+              ? TextCapitalization.sentences
+              : TextCapitalization.none,
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hintText,

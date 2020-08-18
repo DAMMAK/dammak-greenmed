@@ -6,10 +6,10 @@ class ScaffoldWithNav extends StatelessWidget {
   final Color bgColor;
   final List<Widget> children;
   ScaffoldWithNav({
-    this.bgColor = Colors.white,
+    this.bgColor = AppColors.pageBgColor,
     @required this.children,
   });
-  @override
+  @override 
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;

@@ -1,5 +1,7 @@
+import 'package:doctorappointment/config/appconfig.dart';
 import 'package:doctorappointment/widgets/navbar.dart';
 import 'package:doctorappointment/widgets/scaffold/scaffold_with_nav.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/material.dart';
 
 class EmergencyCall extends StatelessWidget {
@@ -7,6 +9,17 @@ class EmergencyCall extends StatelessWidget {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    // Trigger Device Dialer to make the phone call
+    // NB it doesn't work on emulator except real device
+    Future.delayed(Duration(seconds: 2), () async {
+      var phoneNumber = "tel://${AppConfig.EMERGENCY_NUMBER.toString()}";
+      if (await canLaunch(phoneNumber)) {
+        // check if it can make call on the device then make call
+        await launch(phoneNumber);
+      } else {
+        throw "Can't phone that number.";
+      }
+    });
     return ScaffoldWithNav(
       children: [
         Row(
@@ -25,7 +38,7 @@ class EmergencyCall extends StatelessWidget {
                 ),
                 SizedBox(height: height * 0.01),
                 Text(
-                  "07034811040",
+                  AppConfig.EMERGENCY_NUMBER.toString(),
                   style: TextStyle(
                     fontSize: width * 0.06,
                     fontWeight: FontWeight.w900,
