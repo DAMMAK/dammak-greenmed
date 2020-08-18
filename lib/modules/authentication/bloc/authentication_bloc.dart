@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:doctorappointment/modules/authentication/model/login.dart';
 import 'package:doctorappointment/modules/authentication/service/api_client.dart';
+import 'package:doctorappointment/modules/onboarding/model/user.dart';
+
 import 'package:equatable/equatable.dart';
 
 part 'authentication_event.dart';
@@ -30,9 +32,11 @@ class AuthenticationBloc
     try {
       // connect to the Sign In method in the Client class
       var response = await _client.signIn(event.loginModel);
+      // remove loading state
+      yield LoadingOff();
       // check if response is type of boolean
-      if (response) {
-        yield AuthenticationSuccessful();
+      if (response is User) {
+        yield AuthenticationSuccessful(user: response);
       } else {
         // if response is type of String, then return the error message
         yield AuthenticationFailed(

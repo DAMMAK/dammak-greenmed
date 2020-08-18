@@ -4,7 +4,7 @@ import 'package:doctorappointment/modules/authentication/model/login.dart';
 import 'package:doctorappointment/modules/onboarding/model/user.dart';
 
 class AuthenticationClient extends BaseUserClient {
-  Future<bool> signIn(LoginModel model) async {
+  signIn(LoginModel model) async {
     // hash user password
     model.password = super.hashPassword(model.password);
     // check if user exist in the database.
@@ -12,7 +12,8 @@ class AuthenticationClient extends BaseUserClient {
         await DB.find(User.tablename, [model.phoneNumber], "phoneNumber = ?");
 
     if (response.length > 0) {
-      return true;
+      var user = User.fromMap(response.first);
+      return user;
     }
     return false;
   }

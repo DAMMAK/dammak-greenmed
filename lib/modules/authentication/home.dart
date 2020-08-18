@@ -1,6 +1,8 @@
 import 'package:doctorappointment/modules/authentication/widgets/home_button.dart';
+import 'package:doctorappointment/modules/authentication/widgets/user_data.dart';
 import 'package:doctorappointment/routes/routes.dart';
 import 'package:doctorappointment/utils/colors.dart';
+import 'package:doctorappointment/utils/display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,7 +24,7 @@ class Home extends StatelessWidget {
             children: [
               SizedBox(height: height * 0.045),
               Text(
-                "Welcome, Kenneth",
+                "Welcome, ${DisplayUtil.getFirstName(UserData.of(context).user.name)}",
                 style: TextStyle(
                   fontSize: width * 0.07,
                   fontWeight: FontWeight.w900,
@@ -46,7 +48,7 @@ class Home extends StatelessWidget {
                     HomeButton(
                       text: "Direction",
                       image: SvgPicture.asset("assets/images/compass.svg"),
-                      onPressed: (){
+                      onPressed: () {
                         Navigator.pushNamed(context, Routes.direction);
                       },
                     ),

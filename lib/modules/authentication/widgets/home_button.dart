@@ -31,6 +31,12 @@ class _HomeButtonState extends State<HomeButton> {
           widget.color = AppColors.btnClickPrimaryColor;
           widget.textColor = Colors.white;
         });
+        Future.delayed(Duration(seconds: 1), () {
+          setState(() {
+            widget.color = AppColors.homeButtonColor;
+            widget.textColor = AppColors.btnTextColor;
+          });
+        });
         widget.onPressed();
       },
       child: AnimatedContainer(
