@@ -1,6 +1,6 @@
 # doctorappointment
 
-A new Flutter project.
+A flutter project for booking appointment with doctors
 
 ## Getting Started
 
